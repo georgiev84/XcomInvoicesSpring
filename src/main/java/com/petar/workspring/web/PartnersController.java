@@ -1,32 +1,47 @@
 package com.petar.workspring.web;
 
-import com.petar.workspring.viewmodels.PartnerModel;
+import com.petar.workspring.model.binding.PartnerLoginBindingModel;
+import com.petar.workspring.model.service.PartnerServiceModel;
+import com.petar.workspring.service.PartnerService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class PartnersController {
 
-    @GetMapping("/login")
-    public ModelAndView getDate(ModelAndView modelAndView){
-        modelAndView.addObject("date", new Date());
+    private final PartnerService partnerService;
+    private final ModelMapper modelMapper;
 
+    @Autowired
+    public PartnersController(PartnerService partnerService, ModelMapper modelMapper) {
+        this.partnerService = partnerService;
+        this.modelMapper = modelMapper;
+    }
+
+    @GetMapping("/login")
+    public ModelAndView login(ModelAndView modelAndView){
         modelAndView.setViewName("login");
+
         return modelAndView;
     }
-//    @PostMapping("/login")
-//    public String loginPartner(@ModelAttribute PartnerModel partner, BindingResult bindingResult){
-//        if(bindingResult.hasErrors()){
-//            return "login";
-//        }
-//
-//        int b=5;
-//        return "/";
-//    }
+    @PostMapping("/login")
+    public ModelAndView loginConfirm(@ModelAttribute PartnerLoginBindingModel partnerLoginBindingModel, ModelAndView modelAndView, HttpSession session){
+        PartnerServiceModel partnerServiceModel = this.partnerService.loginUser(this.modelMapper.map(partnerLoginBindingModel, PartnerServiceModel.class));
+        if(partnerServiceModel == null){
+            throw new IllegalArgumentException("User login failed!");
+        }
+
+        session.setAttribute("userId", partnerServiceModel.getId());
+        session.setAttribute("username", partnerServiceModel.getUsername());
+
+        modelAndView.setViewName("invoice");
+        return modelAndView;
+    }
 }

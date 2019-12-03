@@ -4,12 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity(name = "partners_login")
-public class PartnersLoginEntity extends BaseEntity{
+public class Partner extends BaseEntity{
 
     private String email;
     private String password;
 
-    public PartnersLoginEntity() {
+    public Partner() {
     }
 
     @Column(name = "email", columnDefinition = "nvarchar(255)")
