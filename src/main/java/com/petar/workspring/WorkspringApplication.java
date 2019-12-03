@@ -1,5 +1,6 @@
 package com.petar.workspring;
 
+import com.petar.workspring.domain.entities.PartnersLoginEntity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,8 @@ public class WorkspringApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WorkspringApplication.class, args);
+
+
     }
 
 }
