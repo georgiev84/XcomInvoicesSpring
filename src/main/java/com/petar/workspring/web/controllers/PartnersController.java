@@ -54,19 +54,6 @@ public class PartnersController {
         return modelAndView;
     }
 
-    @GetMapping("/invoices")
-    public ModelAndView invoices(ModelAndView modelAndView, HttpSession session){
-        if(session.getAttribute("username") != null){
-
-            modelAndView.setViewName("invoices");
-        } else {
-            modelAndView.setViewName("redirect:/");
-        }
-
-
-        return modelAndView;
-    }
-
     // logout
     @GetMapping("/logout")
     public ModelAndView logout(ModelAndView modelAndView, HttpSession session){
