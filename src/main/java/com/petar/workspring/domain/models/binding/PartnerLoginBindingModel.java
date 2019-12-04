@@ -1,4 +1,4 @@
-package com.petar.workspring.model.binding;
+package com.petar.workspring.domain.models.binding;
 
 
 public class PartnerLoginBindingModel {

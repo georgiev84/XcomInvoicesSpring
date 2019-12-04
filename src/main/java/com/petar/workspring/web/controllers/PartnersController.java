@@ -1,7 +1,7 @@
-package com.petar.workspring.web;
+package com.petar.workspring.web.controllers;
 
-import com.petar.workspring.model.binding.PartnerLoginBindingModel;
-import com.petar.workspring.model.service.PartnerServiceModel;
+import com.petar.workspring.domain.models.binding.PartnerLoginBindingModel;
+import com.petar.workspring.domain.models.service.PartnerServiceModel;
 import com.petar.workspring.service.PartnerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,14 @@ public class PartnersController {
         session.setAttribute("userId", partnerServiceModel.getId());
         session.setAttribute("username", partnerServiceModel.getUsername());
 
-        modelAndView.setViewName("invoice");
+        modelAndView.setViewName("redirect:/invoices");
+        return modelAndView;
+    }
+
+    @GetMapping("/invoices")
+    public ModelAndView invoices(ModelAndView modelAndView){
+        modelAndView.setViewName("invoices");
+
         return modelAndView;
     }
 }

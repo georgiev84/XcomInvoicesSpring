@@ -1,7 +1,7 @@
 package com.petar.workspring.service;
 
 import com.petar.workspring.domain.entities.Partner;
-import com.petar.workspring.model.service.PartnerServiceModel;
+import com.petar.workspring.domain.models.service.PartnerServiceModel;
 import com.petar.workspring.repository.PartnersRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

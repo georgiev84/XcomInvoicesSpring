@@ -1,4 +1,4 @@
-package com.petar.workspring.model.service;
+package com.petar.workspring.domain.models.service;
 
 public class PartnerServiceModel {
 

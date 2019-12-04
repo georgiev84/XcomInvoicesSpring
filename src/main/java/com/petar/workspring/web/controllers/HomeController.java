@@ -1,12 +1,14 @@
-package com.petar.workspring.web;
+package com.petar.workspring.web.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
 
-    public ModelAndView modelandView(ModelAndView modelAndView){
+    @GetMapping("/")
+    public ModelAndView modelAndView(ModelAndView modelAndView){
         modelAndView.setViewName("index");
 
         return modelAndView;
