@@ -20,7 +20,7 @@ public class PartnerServiceImpl implements PartnerService {
 
     @Override
     public PartnerServiceModel loginUser(PartnerServiceModel partnerServiceModel) {
-        Partner partner = this.partnersRepository.findByEmail(partnerServiceModel.getUsername()).orElse(null);
+        Partner partner = this.partnersRepository.findByUsername(partnerServiceModel.getUsername()).orElse(null);
 
         if(partner == null || !partner.getPassword().equals(partnerServiceModel.getPassword())){
             return null;

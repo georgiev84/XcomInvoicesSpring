@@ -26,8 +26,16 @@ public class PartnersController {
     }
 
     @GetMapping("/login")
-    public ModelAndView login(ModelAndView modelAndView){
-        modelAndView.setViewName("login");
+    public ModelAndView login(ModelAndView modelAndView, HttpSession session){
+        if(session.getAttribute("username") != null){
+
+            modelAndView.setViewName("redirect:/invoices");
+        } else {
+
+            modelAndView.setViewName("login");
+        }
+
+        //modelAndView.setViewName("login");
 
         return modelAndView;
     }
@@ -41,14 +49,34 @@ public class PartnersController {
         session.setAttribute("userId", partnerServiceModel.getId());
         session.setAttribute("username", partnerServiceModel.getUsername());
 
+
         modelAndView.setViewName("redirect:/invoices");
         return modelAndView;
     }
 
     @GetMapping("/invoices")
-    public ModelAndView invoices(ModelAndView modelAndView){
-        modelAndView.setViewName("invoices");
+    public ModelAndView invoices(ModelAndView modelAndView, HttpSession session){
+        if(session.getAttribute("username") != null){
 
+            modelAndView.setViewName("invoices");
+        } else {
+            modelAndView.setViewName("redirect:/");
+        }
+
+
+        return modelAndView;
+    }
+
+    // logout
+    @GetMapping("/logout")
+    public ModelAndView logout(ModelAndView modelAndView, HttpSession session){
+
+        if(session.getAttribute("username") == null){
+            modelAndView.setViewName("redirect:/login");
+        } else {
+            session.invalidate();
+            modelAndView.setViewName("redirect:/");
+        }
         return modelAndView;
     }
 }

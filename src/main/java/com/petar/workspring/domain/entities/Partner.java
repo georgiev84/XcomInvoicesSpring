@@ -6,19 +6,19 @@ import javax.persistence.Entity;
 @Entity(name = "partners_login")
 public class Partner extends BaseEntity{
 
-    private String email;
+    private String username;
     private String password;
 
     public Partner() {
     }
 
     @Column(name = "email", columnDefinition = "nvarchar(255)")
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String email) {
+        this.username = email;
     }
 
     @Column(name = "note2", columnDefinition = "nvarchar(255)")

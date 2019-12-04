@@ -2,10 +2,19 @@ package com.petar.workspring.domain.models.binding;
 
 
 public class PartnerLoginBindingModel {
+    private int id;
    private String username;
    private String password;
 
     public PartnerLoginBindingModel() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
