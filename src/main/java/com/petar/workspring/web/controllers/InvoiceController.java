@@ -1,6 +1,7 @@
 package com.petar.workspring.web.controllers;
 
 import com.petar.workspring.domain.data.Invoice;
+import com.petar.workspring.domain.data.InvoiceProductList;
 import com.petar.workspring.service.InvoiceService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,11 @@ import java.util.List;
 @Controller
 public class InvoiceController {
     private final InvoiceService invoiceService;
-    private final EntityManager em;
 
-    public InvoiceController(InvoiceService invoiceService, EntityManager em) {
+
+    public InvoiceController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
-        this.em = em;
+
     }
 
     @GetMapping("/invoices")
@@ -33,11 +34,11 @@ public class InvoiceController {
         }
         ArrayList<Invoice> invoices;
 
-        Integer userId = (Integer) session.getAttribute("userId");
-        if (userId == null || userId <=0){
+        String companyName = (String) session.getAttribute("company");
+        if (companyName == null){
             //kur tuka trqq varnesh neshto 4e ne eok da ne praish zaqvka naprazno
         } else {
-            invoices = invoiceService.getInvoicesForUser(userId);
+            invoices = invoiceService.getInvoicesForUser(companyName);
             modelAndView.addObject("company", session.getAttribute("company"));
             modelAndView.addObject("messages", invoices);
         }
@@ -48,6 +49,24 @@ public class InvoiceController {
         return modelAndView;
     }
 
+        @GetMapping("/invoices/{id}")
+    public ModelAndView details(@PathVariable(name = "id") String id, ModelAndView modelAndView, HttpSession session){
+        if(session.getAttribute("username") == null){
+            modelAndView.setViewName("redirect:/login");
+        } else {
+
+            ArrayList<InvoiceProductList> productList = invoiceService.getInvoiceDetails(id);
+
+            int b=5;
+
+        }
+
+
+        return modelAndView;
+
+    }
+
+// native query - SELECT Code, Name, Qtty FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct=40010788
 //    @GetMapping("/invoices/{id}")
 //    public ModelAndView details(@PathVariable(name = "id") String id, ModelAndView modelAndView, HttpSession session){
 //        if(session.getAttribute("username") == null){

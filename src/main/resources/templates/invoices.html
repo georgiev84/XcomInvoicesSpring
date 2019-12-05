@@ -20,11 +20,13 @@
     <div class="col-auto">
         <table class="text-center table table-responsive">
             <tr>
+                <th>Отвори</th>
                 <th>Фактура No</th>
                 <th>Дата</th>
                 <th>Стойност с ДДС</th>
             </tr>
             <tr th:each="message : ${messages}">
+                <td><a th:href="@{/invoices/} + ${message.getInvoiceAcct()}" th:text="Open">Download</a></td>
                 <td th:text="${message.getInvoiceAcct()}">1</td>
                 <td><a href="#" th:text="${#dates.format(message.getInvoiceDate(), 'dd-MM-yyy')}">Title ...</a></td>
                 <td th:text="${#numbers.formatDecimal(message.getInvoiceSum(), 0, 'COMMA', 2, 'POINT')}">Text ...</td>

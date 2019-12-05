@@ -1,6 +1,7 @@
 package com.petar.workspring.service;
 
 import com.petar.workspring.domain.data.Invoice;
+import com.petar.workspring.domain.data.InvoiceProductList;
 import com.petar.workspring.repository.PartnersRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,16 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public ArrayList<Invoice> getInvoicesForUser(int userId) {
-        ArrayList<Invoice> invoices = invoiceRepository.getInvoiceByPartnerId(userId);
-
+    public ArrayList<Invoice> getInvoicesForUser(String companyName) {
+        ArrayList<Invoice> invoices = invoiceRepository.getInvoiceByPartnerName(companyName);
+        int b=5;
         return invoices;
+    }
+
+
+    @Override
+    public ArrayList<InvoiceProductList> getInvoiceDetails(String invoiceId) {
+        ArrayList<InvoiceProductList> invoiceProductList = invoiceRepository.getInvoiceProducts(invoiceId);
+        return invoiceProductList;
     }
 }
