@@ -1,9 +1,15 @@
 package com.petar.workspring.domain.data;
 
 
-public class Invoice {
-    private long invoiceAcct;
-    private String invoiceDate;
+import org.springframework.beans.factory.annotation.Value;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public interface Invoice {
+    String getInvoiceAcct();
+    Date getInvoiceDate();
+    BigDecimal getInvoiceSum();
 
 
 }

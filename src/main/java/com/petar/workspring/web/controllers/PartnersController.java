@@ -43,6 +43,7 @@ public class PartnersController {
     public ModelAndView loginConfirm(@ModelAttribute PartnerLoginBindingModel partnerLoginBindingModel, ModelAndView modelAndView, HttpSession session){
         PartnerServiceModel partnerServiceModel = this.partnerService.loginUser(this.modelMapper.map(partnerLoginBindingModel, PartnerServiceModel.class));
         if(partnerServiceModel == null){
+            modelAndView.setViewName("redirect:/login");
             throw new IllegalArgumentException("User login failed!");
         }
 

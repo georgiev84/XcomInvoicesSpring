@@ -16,6 +16,7 @@ public interface PartnersRepository extends JpaRepository<Partner, Integer> {
 
     Optional<Partner> findByUsername(String email);
 
+
 @Query(value = "SELECT documents.InvoiceNumber AS InvoiceAcct, " +
         "documents.InvoiceDate, documents.TaxDate,operations.OperType AS OperTypeInvisible, " +
         " operations.Acct AS Acct, " +
@@ -42,11 +43,11 @@ public interface PartnersRepository extends JpaRepository<Partner, Integer> {
         "operations.OperType, documents.TaxDate, " +
         "operations.Acct, partners.ID, partners.Company, documents.Reason, " +
         "documents.Description, documents.Place, documents.DocumentType ", nativeQuery = true)
-ArrayList<String> getInvoiceByPartnerId(@Param("userId") int userId);
+ArrayList<String> getInvoiceByPartnerId2(@Param("userId") int userId);
 
     @Query(value = "SELECT documents.InvoiceNumber AS InvoiceAcct, " +
-            "documents.InvoiceDate, documents.TaxDate,operations.OperType AS OperTypeInvisible, " +
-            " operations.Acct AS Acct " +
+            "documents.InvoiceDate, " +
+            "SUM(operations.Qtty * (operations.PriceOut+operations.VATOut)) AS InvoiceSum " +
             "FROM ((((((operations  " +
             "LEFT JOIN documents " +
             "ON (operations.Acct = documents.Acct AND  (operations.OperType = documents.OperType OR operations.OperType+100 = documents.OperType))) " +
@@ -60,7 +61,7 @@ ArrayList<String> getInvoiceByPartnerId(@Param("userId") int userId);
             "GROUP BY documents.InvoiceNumber, documents.InvoiceDate, " +
             "operations.OperType, documents.TaxDate, " +
             "operations.Acct, partners.ID, partners.Company, documents.Reason, " +
-            "documents.Description, documents.Place, documents.DocumentType ", nativeQuery = true)
-    ArrayList<Invoice> getInvoiceByPartnerId1(@Param("userId") int userId);
+            "documents.Description, documents.Place, documents.DocumentType ORDER BY InvoiceDate DESC", nativeQuery = true)
+    ArrayList<Invoice> getInvoiceByPartnerId(@Param("userId") int userId);
 
 }

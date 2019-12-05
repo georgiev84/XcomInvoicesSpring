@@ -30,13 +30,19 @@ public class InvoiceController {
         } else {
             modelAndView.setViewName("redirect:/");
         }
+        ArrayList<Invoice> invoices;
 
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId == null || userId <=0){
             //kur tuka trqq varnesh neshto 4e ne eok da ne praish zaqvka naprazno
+        } else {
+            invoices = invoiceService.getInvoicesForUser(userId);
+            modelAndView.addObject("company", session.getAttribute("username"));
+            modelAndView.addObject("messages", invoices);
         }
 
-        ArrayList<String> invoices = invoiceService.getInvoicesForUser(userId);
+
+
 
 
   /*  //        Query q = em.createNativeQuery("SELECT * FROM partners");
@@ -47,6 +53,8 @@ public class InvoiceController {
         q.setParameter("parameterId", session.getAttribute("userId"));
 // tuka vzimam sessionId i go vkarvam v zaiavkata ok
         List<String> invoiceList= q.getResultList();*/
+
+
 
         return modelAndView;
     }

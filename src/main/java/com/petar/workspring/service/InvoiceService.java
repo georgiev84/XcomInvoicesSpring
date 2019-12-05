@@ -8,5 +8,5 @@ import java.util.ArrayList;
 
 @Service
 public interface InvoiceService {
-        ArrayList<String> getInvoicesForUser(int userId);
+        ArrayList<Invoice> getInvoicesForUser(int userId);
 }
