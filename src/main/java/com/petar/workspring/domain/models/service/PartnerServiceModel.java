@@ -5,6 +5,7 @@ public class PartnerServiceModel {
     private int id;
     private String username;
     private String password;
+    private String company;
 
     public PartnerServiceModel() {
     }
@@ -31,5 +32,13 @@ public class PartnerServiceModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

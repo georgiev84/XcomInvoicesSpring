@@ -8,6 +8,7 @@ public class Partner extends BaseEntity{
 
     private String username;
     private String password;
+    private String company;
 
     public Partner() {
     }
@@ -28,5 +29,14 @@ public class Partner extends BaseEntity{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Column(name = "company", columnDefinition = "nvarchar(255)")
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
     }
 }

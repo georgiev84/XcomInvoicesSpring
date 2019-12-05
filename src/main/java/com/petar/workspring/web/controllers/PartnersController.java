@@ -49,7 +49,7 @@ public class PartnersController {
 
         session.setAttribute("userId", partnerServiceModel.getId());
         session.setAttribute("username", partnerServiceModel.getUsername());
-
+        session.setAttribute("company", partnerServiceModel.getCompany());
 
         modelAndView.setViewName("redirect:/invoices");
         return modelAndView;
