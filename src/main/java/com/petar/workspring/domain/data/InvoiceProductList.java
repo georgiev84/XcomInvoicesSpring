@@ -5,6 +5,7 @@ import java.util.Date;
 
 public interface InvoiceProductList {
     String getCode();
-    Date getName();
-    BigDecimal getQtty();
+    String getName();
+    int getQtty();
+
 }

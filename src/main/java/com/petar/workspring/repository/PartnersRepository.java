@@ -18,7 +18,7 @@ public interface PartnersRepository extends JpaRepository<Partner, Integer> {
     Optional<Partner> findByUsername(String email);
 
 
-@Query(value = "SELECT documents.InvoiceNumber AS InvoiceAcct, " +
+@Query(value = "SELECT Documents.acct, documents.InvoiceNumber AS InvoiceAcct, " +
         "documents.InvoiceDate, documents.TaxDate,operations.OperType AS OperTypeInvisible, " +
         " operations.Acct AS Acct, " +
         "partners.ID AS PartnerID, " +
@@ -46,13 +46,14 @@ public interface PartnersRepository extends JpaRepository<Partner, Integer> {
         "documents.Description, documents.Place, documents.DocumentType ", nativeQuery = true)
 ArrayList<String> getInvoiceByPartnerId2(@Param("userId") int userId);
 
-
-
+// obedinqva stokite po fakturata - SELECT * FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct=40010787
+//SELECT Documents.ID, Documents.Acct, InvoiceNumber, Company, InvoiceDate, Place, PaymentType FROM Documents LEFT JOIN Operations ON Operations.Acct=Documents.Acct JOIN Partners ON Operations.PartnerID=Partners.ID WHERE (Place LIKE '%Пловдив%' AND InvoiceDate='"+dateNow+"') GROUP BY Documents.ID, Documents.Acct, InvoiceNumber, Company, InvoiceDate, Place, PaymentType ORDER BY Documents.InvoiceDate DESC, Documents.InvoiceNumber DESC
 //    @Query(value = "SELECT Code, Name, Qtty FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct=:invoiceId", nativeQuery = true)
-    @Query(value = "SELECT Code, Name, Qtty FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct=0000063850", nativeQuery = true)
+
+    @Query(value = "SELECT Code, Name, Qtty FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct='40003268'", nativeQuery = true)
     ArrayList<InvoiceProductList> getInvoiceProducts(@Param("invoiceId") String invoiceId);
 
-
+// SELECT Acct FROM Documents WHERE InvoiceNumber='0040008962'
     @Query(value = "SELECT * FROM test_invoice WHERE PartnerID=:partnerId", nativeQuery = true)
     ArrayList<Invoice> getInvoiceByPartnerId(@Param("partnerId") int userId);
 
