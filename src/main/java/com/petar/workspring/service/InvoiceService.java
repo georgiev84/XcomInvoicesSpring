@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 @Service
 public interface InvoiceService {
-        ArrayList<Invoice> getInvoicesForUser(String userId);
+        ArrayList<Invoice> getInvoicesForUser(int userId);
 
         ArrayList<InvoiceProductList> getInvoiceDetails(String invoiceId);
 }

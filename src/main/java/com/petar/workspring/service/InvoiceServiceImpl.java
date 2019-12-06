@@ -21,8 +21,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public ArrayList<Invoice> getInvoicesForUser(String companyName) {
-        ArrayList<Invoice> invoices = invoiceRepository.getInvoiceByPartnerName(companyName);
+    public ArrayList<Invoice> getInvoicesForUser(int companyName) {
+        ArrayList<Invoice> invoices = invoiceRepository.getInvoiceByPartnerId(companyName);
         int b=5;
         return invoices;
     }

@@ -34,11 +34,13 @@ public class InvoiceController {
         }
         ArrayList<Invoice> invoices;
 
-        String companyName = (String) session.getAttribute("company");
-        if (companyName == null){
+
+        Integer userid = (int) session.getAttribute("userId");
+
+        if (userid == null){
             //kur tuka trqq varnesh neshto 4e ne eok da ne praish zaqvka naprazno
         } else {
-            invoices = invoiceService.getInvoicesForUser(companyName);
+            invoices = invoiceService.getInvoicesForUser(userid);
             modelAndView.addObject("company", session.getAttribute("company"));
             modelAndView.addObject("messages", invoices);
         }
@@ -49,7 +51,7 @@ public class InvoiceController {
         return modelAndView;
     }
 
-        @GetMapping("/invoices/{id}")
+    @GetMapping("/invoices/{id}")
     public ModelAndView details(@PathVariable(name = "id") String id, ModelAndView modelAndView, HttpSession session){
         if(session.getAttribute("username") == null){
             modelAndView.setViewName("redirect:/login");
@@ -57,8 +59,9 @@ public class InvoiceController {
 
             ArrayList<InvoiceProductList> productList = invoiceService.getInvoiceDetails(id);
 
+            modelAndView.addObject("invoiceDetails", productList);
             int b=5;
-
+            modelAndView.setViewName("invoice_details");
         }
 
 

@@ -5,17 +5,32 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Система за фактури</title>
+    <title>Invoice Details</title>
     <link rel="stylesheet" th:href="@{/css/reset-css.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-
 <div th:replace="fragments/header :: header"></div>
+<hr class="bg-exodia hr-2"/>
+<h1 class="text-center text-exodia">Invoice Details</h1>
+<hr class="bg-exodia hr-2"/>
 
-<hr class="bg-exodia hr-2"/>
-<h1 class="text-center text-exodia">Система за фактури</h1>
-<hr class="bg-exodia hr-2"/>
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <table class="text-center table table-responsive">
+            <tr>
+                <th>Код</th>
+                <th>Продукт</th>
+                <th>Брой</th>
+            </tr>
+            <tr th:each="details : ${invoiceDetails}">
+                <td th:text="${details.getCode()}">1</td>
+                <td th:text="${details.getName()}">Title .../td>
+                <td th:text="${details.getQtty()}">Text ...</td>
+            </tr>
+        </table>
+    </div>
+</div>
 </body>
 </html>
