@@ -49,7 +49,7 @@ ArrayList<String> getInvoiceByPartnerId2(@Param("userId") int userId);
 // obedinqva stokite po fakturata - SELECT * FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct=40010787
 //SELECT Documents.ID, Documents.Acct, InvoiceNumber, Company, InvoiceDate, Place, PaymentType FROM Documents LEFT JOIN Operations ON Operations.Acct=Documents.Acct JOIN Partners ON Operations.PartnerID=Partners.ID WHERE (Place LIKE '%Пловдив%' AND InvoiceDate='"+dateNow+"') GROUP BY Documents.ID, Documents.Acct, InvoiceNumber, Company, InvoiceDate, Place, PaymentType ORDER BY Documents.InvoiceDate DESC, Documents.InvoiceNumber DESC
 //    @Query(value = "SELECT Code, Name, Qtty FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct=:invoiceId", nativeQuery = true)
-
+// обединени стокови - acc multi - invoiceNumber
     @Query(value = "SELECT Code, Name, Qtty FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct='40003268'", nativeQuery = true)
     ArrayList<InvoiceProductList> getInvoiceProducts(@Param("invoiceId") String invoiceId);
 
