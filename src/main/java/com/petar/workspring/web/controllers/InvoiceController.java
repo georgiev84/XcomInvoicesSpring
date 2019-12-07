@@ -2,14 +2,16 @@ package com.petar.workspring.web.controllers;
 
 import com.petar.workspring.domain.data.Invoice;
 import com.petar.workspring.domain.data.InvoiceProduct;
+import com.petar.workspring.domain.models.binding.PartnerLoginBindingModel;
+import com.petar.workspring.domain.models.service.PartnerServiceModel;
 import com.petar.workspring.service.InvoiceService;
+import com.petar.workspring.service.PartnerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 @Controller
@@ -17,7 +19,7 @@ public class InvoiceController {
     private final InvoiceService invoiceService;
 
 
-    public InvoiceController(InvoiceService invoiceService) {
+    public InvoiceController(InvoiceService invoiceService, PartnerService partnerService, ModelMapper modelMapper, PartnerService partnerService1, ModelMapper modelMapper1) {
         this.invoiceService = invoiceService;
 
     }
@@ -52,8 +54,8 @@ public class InvoiceController {
     @GetMapping("/invoices/{id}")
     public ModelAndView details(@PathVariable(name = "id") String id, ModelAndView modelAndView, HttpSession session){
 
-        // check session.attribute(userid) == id from database
-        if(session.getAttribute("username") == null){
+
+        if(session.getAttribute("username") == null ){
             modelAndView.setViewName("redirect:/login");
         } else {
 

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.servlet.http.Part;
 import java.util.ArrayList;
 import java.util.Optional;
 

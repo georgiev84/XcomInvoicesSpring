@@ -39,7 +39,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             for (String acct: acctList) {
 
                 List<InvoiceProduct> list = invoiceRepository.getInvoiceProducts(acct);
-                BigDecimal test = list.get(0).getPrice();
+
                 if(list.size() > 1){
 
                     for(InvoiceProduct item : list){

@@ -28,4 +28,6 @@ public class PartnerServiceImpl implements PartnerService {
 
         return this.modelMapper.map(partner, PartnerServiceModel.class);
     }
+
+
 }
