@@ -7,6 +7,6 @@ public interface InvoiceProduct {
     String getCode();
     String getName();
     int getQtty();
-    
+    BigDecimal getPrice();
 
 }

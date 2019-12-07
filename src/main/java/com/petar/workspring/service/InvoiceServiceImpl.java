@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class InvoiceServiceImpl implements InvoiceService {
             for (String acct: acctList) {
 
                 List<InvoiceProduct> list = invoiceRepository.getInvoiceProducts(acct);
-
+                BigDecimal test = list.get(0).getPrice();
                 if(list.size() > 1){
 
                     for(InvoiceProduct item : list){

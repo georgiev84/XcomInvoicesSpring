@@ -24,12 +24,15 @@
                 <th>Код</th>
                 <th>Продукт</th>
                 <th>Брой</th>
+                <th>Цена</th>
             </tr>
             <tr th:each="details,iterStat : ${invoiceDetails}">
                 <td th:text="${iterStat.index+1}">1</td>
                 <td th:text="${details.getCode()}">1</td>
                 <td th:text="${details.getName()}">Title .../td>
                 <td th:text="${details.getQtty()}">Text ...</td>
+                <td th:text="${#numbers.formatDecimal(details.getPrice(), 1, 'COMMA', 4, 'POINT')}">Title .../td>
+
             </tr>
         </table>
     </div>
