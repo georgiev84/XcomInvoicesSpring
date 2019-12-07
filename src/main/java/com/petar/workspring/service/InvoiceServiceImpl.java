@@ -1,13 +1,14 @@
 package com.petar.workspring.service;
 
 import com.petar.workspring.domain.data.Invoice;
-import com.petar.workspring.domain.data.InvoiceProductList;
+import com.petar.workspring.domain.data.InvoiceProduct;
 import com.petar.workspring.repository.PartnersRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService {
@@ -21,16 +22,36 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public ArrayList<Invoice> getInvoicesForUser(int companyName) {
-        ArrayList<Invoice> invoices = invoiceRepository.getInvoiceByPartnerId(companyName);
-        int b=5;
+    public ArrayList<Invoice> getInvoicesForUser(int userId) {
+        ArrayList<Invoice> invoices = invoiceRepository.getInvoiceByPartnerId(userId);
+
         return invoices;
     }
 
 
     @Override
-    public ArrayList<InvoiceProductList> getInvoiceDetails(String invoiceId) {
-        ArrayList<InvoiceProductList> invoiceProductList = invoiceRepository.getInvoiceProducts(invoiceId);
-        return invoiceProductList;
+    public ArrayList<InvoiceProduct> getInvoiceDetails(String invoiceId) {
+
+        ArrayList<String> acctList = invoiceRepository.getInvoiceAcct(invoiceId);
+        ArrayList<InvoiceProduct> products = new ArrayList<>();
+
+            for (String acct: acctList) {
+
+                List<InvoiceProduct> list = invoiceRepository.getInvoiceProducts(acct);
+
+                if(list.size() > 1){
+
+                    for(InvoiceProduct item : list){
+                        products.add(item);
+                    }
+
+                } else {
+
+                    products.add(list.get(0));
+                }
+
+            }
+
+        return products;
     }
 }

@@ -2,7 +2,7 @@ package com.petar.workspring.service;
 
 
 import com.petar.workspring.domain.data.Invoice;
-import com.petar.workspring.domain.data.InvoiceProductList;
+import com.petar.workspring.domain.data.InvoiceProduct;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,5 +11,6 @@ import java.util.ArrayList;
 public interface InvoiceService {
         ArrayList<Invoice> getInvoicesForUser(int userId);
 
-        ArrayList<InvoiceProductList> getInvoiceDetails(String invoiceId);
+        ArrayList<InvoiceProduct> getInvoiceDetails(String invoiceId);
+
 }

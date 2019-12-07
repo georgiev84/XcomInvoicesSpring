@@ -1,9 +1,8 @@
 package com.petar.workspring.repository;
 
 import com.petar.workspring.domain.data.Invoice;
-import com.petar.workspring.domain.data.InvoiceProductList;
+import com.petar.workspring.domain.data.InvoiceProduct;
 import com.petar.workspring.domain.entities.Partner;
-import com.petar.workspring.domain.models.service.PartnerServiceModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -50,8 +49,12 @@ ArrayList<String> getInvoiceByPartnerId2(@Param("userId") int userId);
 //SELECT Documents.ID, Documents.Acct, InvoiceNumber, Company, InvoiceDate, Place, PaymentType FROM Documents LEFT JOIN Operations ON Operations.Acct=Documents.Acct JOIN Partners ON Operations.PartnerID=Partners.ID WHERE (Place LIKE '%Пловдив%' AND InvoiceDate='"+dateNow+"') GROUP BY Documents.ID, Documents.Acct, InvoiceNumber, Company, InvoiceDate, Place, PaymentType ORDER BY Documents.InvoiceDate DESC, Documents.InvoiceNumber DESC
 //    @Query(value = "SELECT Code, Name, Qtty FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct=:invoiceId", nativeQuery = true)
 // обединени стокови - acc multi - invoiceNumber
-    @Query(value = "SELECT Code, Name, Qtty FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct='40003268'", nativeQuery = true)
-    ArrayList<InvoiceProductList> getInvoiceProducts(@Param("invoiceId") String invoiceId);
+    @Query(value = "SELECT Code, Name, Qtty FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct=:acctId", nativeQuery = true)
+    ArrayList<InvoiceProduct> getInvoiceProducts(@Param("acctId") String acctId);
+
+
+    @Query(value = "SELECT Acct FROM Documents WHERE InvoiceNumber=:invoiceId", nativeQuery = true)
+    ArrayList<String> getInvoiceAcct(@Param("invoiceId") String invoiceId);
 
 // SELECT Acct FROM Documents WHERE InvoiceNumber='0040008962'
     @Query(value = "SELECT * FROM test_invoice WHERE PartnerID=:partnerId", nativeQuery = true)
