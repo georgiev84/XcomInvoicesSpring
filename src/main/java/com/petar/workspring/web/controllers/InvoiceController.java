@@ -29,21 +29,23 @@ public class InvoiceController {
         if(session.getAttribute("username") != null){
 
             modelAndView.setViewName("invoices");
+
+            ArrayList<Invoice> invoices;
+
+
+            Integer userid = (int) session.getAttribute("userId");
+
+            if (userid == null){
+                //kur tuka trqq varnesh neshto 4e ne eok da ne praish zaqvka naprazno
+            } else {
+                invoices = invoiceService.getInvoicesForUser(userid);
+                modelAndView.addObject("company", session.getAttribute("company"));
+                modelAndView.addObject("messages", invoices);
+            }
         } else {
             modelAndView.setViewName("redirect:/");
         }
-        ArrayList<Invoice> invoices;
 
-
-        Integer userid = (int) session.getAttribute("userId");
-
-        if (userid == null){
-            //kur tuka trqq varnesh neshto 4e ne eok da ne praish zaqvka naprazno
-        } else {
-            invoices = invoiceService.getInvoicesForUser(userid);
-            modelAndView.addObject("company", session.getAttribute("company"));
-            modelAndView.addObject("messages", invoices);
-        }
 
 
 
