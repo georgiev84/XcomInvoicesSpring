@@ -3,9 +3,12 @@ package com.petar.workspring.service;
 import com.petar.workspring.domain.entities.Partner;
 import com.petar.workspring.domain.models.service.PartnerServiceModel;
 import com.petar.workspring.repository.PartnersRepository;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.commons.codec.digest.DigestUtils;
+
 
 @Service
 public class PartnerServiceImpl implements PartnerService {
@@ -20,9 +23,16 @@ public class PartnerServiceImpl implements PartnerService {
 
     @Override
     public PartnerServiceModel loginUser(PartnerServiceModel partnerServiceModel) {
+
+
+
         Partner partner = this.partnersRepository.findByUsername(partnerServiceModel.getUsername()).orElse(null);
 
-        if(partner == null || !partner.getPassword().equals(partnerServiceModel.getPassword())){
+        String pswd = partnerServiceModel.getPassword();
+        
+        // for password crypt DigestUtils.shaHex(pswd)
+
+        if(partner == null || !partner.getPassword().equals(pswd)){
             return null;
         }
 
