@@ -18,7 +18,7 @@ public interface PartnersRepository extends JpaRepository<Partner, Integer> {
     Optional<Partner> findByUsername(String email);
 
     // NATIVE QUERIES
-    
+
     //  TOO SLOW, better using cash table -> @Query(value = "SELECT Code, Name, Qtty, PriceOut AS Price FROM Operations LEFT JOIN Goods ON Goods.id=Operations.GoodId WHERE Acct=:acctId", nativeQuery = true)
     @Query(value = "SELECT Code, Name, Qtty, Price AS Price FROM test_invoice_details WHERE Acct=:acctId", nativeQuery = true)
     ArrayList<InvoiceProduct> getInvoiceProducts(@Param("acctId") String acctId);

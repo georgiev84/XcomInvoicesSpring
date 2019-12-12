@@ -8,11 +8,13 @@ import com.petar.workspring.service.InvoiceService;
 import com.petar.workspring.service.PartnerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 public class InvoiceController {
@@ -63,6 +65,7 @@ public class InvoiceController {
 
             ArrayList<InvoiceProduct> productList = invoiceService.getInvoiceDetails(id);
 
+
             modelAndView.addObject("invoiceDetails", productList);
 
             modelAndView.setViewName("invoice_details");
@@ -71,5 +74,14 @@ public class InvoiceController {
         return modelAndView;
 
     }
+
+//    @RequestMapping("/invoices/{id}")
+//    public String getContent1(@PathVariable(name = "id") String id, Model model) {
+//            ArrayList<InvoiceProduct> productList = invoiceService.getInvoiceDetails(id);
+//
+//            model.addAttribute("invoiceDetails", productList);
+//
+//        return "content :: resultList";
+//    }
 
 }

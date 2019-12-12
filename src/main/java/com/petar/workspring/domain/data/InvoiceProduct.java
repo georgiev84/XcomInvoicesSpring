@@ -9,4 +9,6 @@ public interface InvoiceProduct {
     int getQtty();
     BigDecimal getPrice();
 
+
+
 }
