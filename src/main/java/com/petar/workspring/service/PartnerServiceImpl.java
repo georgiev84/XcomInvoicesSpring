@@ -29,7 +29,7 @@ public class PartnerServiceImpl implements PartnerService {
         Partner partner = this.partnersRepository.findByUsername(partnerServiceModel.getUsername()).orElse(null);
 
         String pswd = partnerServiceModel.getPassword();
-        
+
         // for password crypt DigestUtils.shaHex(pswd)
 
         if(partner == null || !partner.getPassword().equals(pswd)){
