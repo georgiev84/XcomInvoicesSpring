@@ -58,15 +58,19 @@ public class GeneratePdfReport {
             mainTable.addCell(tableSeller);
 
             // TABLE PRODUCTS
-            PdfPTable table = new PdfPTable(4);
+            PdfPTable table = new PdfPTable(5);
             table.setWidthPercentage(100);
 
 
-            table.setWidths(new float[] { 5, 20, 5, 5 });
+            table.setWidths(new float[] { 2, 4, 20, 5, 5 });
 
 
 
             PdfPCell hcell;
+            hcell = new PdfPCell(new Phrase("Ред", headFont));
+            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            table.addCell(hcell);
+
             hcell = new PdfPCell(new Phrase("Код", headFont));
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
@@ -83,11 +87,16 @@ public class GeneratePdfReport {
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
-
+            int counterRow =0;
             for (InvoiceProduct product : products) {
 
                 PdfPCell cell;
-
+                counterRow++;
+                cell = new PdfPCell(new Phrase(String.valueOf(counterRow),commonFont));
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setPaddingRight(5);
+                table.addCell(cell);
 
                 cell = new PdfPCell(new Phrase(product.getCode(),commonFont));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);

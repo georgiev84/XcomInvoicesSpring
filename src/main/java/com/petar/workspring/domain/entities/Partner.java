@@ -93,7 +93,7 @@ public class Partner extends BaseEntity{
 
     @Override
     public String toString() {
-        return company + 
+        return company +
                 ", Град: " + city +
                 ", МОЛ: " + mol +
                 ", Адрес: " + address +
