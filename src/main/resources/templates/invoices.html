@@ -13,7 +13,7 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <hr class="bg-exodia hr-2"/>
-<h1 class="text-center text-exodia">Invoices</h1>
+<h1 class="text-center text-exodia">Списък с издадени фактури</h1>
 <hr class="bg-exodia hr-2"/>
 
 
@@ -21,16 +21,18 @@
     <div class="col-auto">
         <table class="text-center table table-responsive">
             <tr>
-                <th>Отвори</th>
+                <th></th>
                 <th>Фактура No</th>
                 <th>Дата</th>
                 <th>Стойност с ДДС</th>
+                <th></th>
             </tr>
             <tr th:each="message : ${messages}">
-                <td><a th:href="@{/invoices/} + ${message.getInvoiceAcct()}" th:text="Open">Download</a></td>
-                <td th:text="${message.getInvoiceAcct()}">1</td>
-                <td><a href="#" th:text="${#dates.format(message.getInvoiceDate(), 'dd-MM-yyy')}">Title ...</a></td>
-                <td th:text="${#numbers.formatDecimal(message.getInvoiceSum(), 0, 'COMMA', 2, 'POINT')}">Text ...</td>
+                <td><a th:href="@{/invoices/} + ${message.getInvoiceAcct()}" th:text="Отвори">Download</a></td>
+                <td th:text="${message.getInvoiceAcct()}">Invoice ...</td>
+                <td th:text="${#dates.format(message.getInvoiceDate(), 'dd-MM-yyy')}">Date ...</td>
+                <td th:text="${#numbers.formatDecimal(message.getInvoiceSum(), 0, 'COMMA', 2, 'POINT')}">Sum ...</td>
+                <td><a th:href="@{/pdfreport/} + ${message.getInvoiceAcct()}" ><img th:src="@{images/pdf.png}" th:width="25px" th:height="25px" th:title="Свали"/></a></td>
             </tr>
         </table>
     </div>

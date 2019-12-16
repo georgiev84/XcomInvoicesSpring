@@ -2,6 +2,7 @@ package com.petar.workspring.service;
 
 import com.petar.workspring.domain.data.Invoice;
 import com.petar.workspring.domain.data.InvoiceProduct;
+import com.petar.workspring.domain.entities.Partner;
 import com.petar.workspring.repository.PartnersRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,14 @@ import java.util.*;
 public class InvoiceServiceImpl implements InvoiceService {
     private final PartnersRepository invoiceRepository;
     private final ModelMapper modelMapper;
+    private final PartnerService partnerService;
+
 
     @Autowired
-    public InvoiceServiceImpl(PartnersRepository invoiceRepository, ModelMapper modelMapper) {
+    public InvoiceServiceImpl(PartnersRepository invoiceRepository, ModelMapper modelMapper, PartnerService partnerService) {
         this.invoiceRepository = invoiceRepository;
         this.modelMapper = modelMapper;
+        this.partnerService = partnerService;
     }
 
     @Override
@@ -27,6 +31,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         return invoices;
     }
+
 
 
     @Override
@@ -92,5 +97,16 @@ public class InvoiceServiceImpl implements InvoiceService {
         return listOfValues;
     }
 
+    @Override
+    public Partner getPartnerInfo(int userId) {
+        Partner partner = invoiceRepository.findById(userId);
 
+        return partner;
+    }
+
+    @Override
+    public String checkInvoiceOwner(String invoiceId) {
+
+        return  invoiceRepository.getInvoicePartner(invoiceId);
+    }
 }

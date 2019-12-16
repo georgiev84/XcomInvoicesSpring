@@ -21,7 +21,7 @@ public class InvoiceController {
     private final InvoiceService invoiceService;
 
 
-    public InvoiceController(InvoiceService invoiceService, PartnerService partnerService, ModelMapper modelMapper, PartnerService partnerService1, ModelMapper modelMapper1) {
+    public InvoiceController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
 
     }
@@ -57,9 +57,10 @@ public class InvoiceController {
 
     @GetMapping("/invoices/{id}")
     public ModelAndView details(@PathVariable(name = "id") String id, ModelAndView modelAndView, HttpSession session){
+        String owner = invoiceService.checkInvoiceOwner(id);
+        String sessionOwner = session.getAttribute("userId").toString();
 
-
-        if(session.getAttribute("username") == null ){
+        if(session.getAttribute("username") == null || !owner.equals(sessionOwner)){
             modelAndView.setViewName("redirect:/login");
         } else {
 

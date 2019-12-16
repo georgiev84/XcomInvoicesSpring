@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class PartnersController {
-
+    public static String partnerId;
     private final PartnerService partnerService;
     private final ModelMapper modelMapper;
 
@@ -42,10 +42,12 @@ public class PartnersController {
     @PostMapping("/login")
     public ModelAndView loginConfirm(@ModelAttribute PartnerLoginBindingModel partnerLoginBindingModel, ModelAndView modelAndView, HttpSession session){
         PartnerServiceModel partnerServiceModel = this.partnerService.loginUser(this.modelMapper.map(partnerLoginBindingModel, PartnerServiceModel.class));
+
         if(partnerServiceModel == null){
             modelAndView.setViewName("redirect:/login");
             throw new IllegalArgumentException("User login failed!");
         }
+        partnerId = partnerServiceModel.getUsername();
 
         session.setAttribute("userId", partnerServiceModel.getId());
         session.setAttribute("username", partnerServiceModel.getUsername());

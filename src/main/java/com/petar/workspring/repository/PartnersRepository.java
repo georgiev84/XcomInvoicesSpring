@@ -16,6 +16,7 @@ import java.util.Optional;
 public interface PartnersRepository extends JpaRepository<Partner, Integer> {
 
     Optional<Partner> findByUsername(String email);
+    Partner findById(int partnerId);
 
     // NATIVE QUERIES
 
@@ -30,6 +31,9 @@ public interface PartnersRepository extends JpaRepository<Partner, Integer> {
 
     @Query(value = "SELECT * FROM test_invoice WHERE PartnerID=:partnerId", nativeQuery = true)
     ArrayList<Invoice> getInvoiceByPartnerId(@Param("partnerId") int userId);
+
+    @Query(value = "SELECT PartnerID FROM test_invoice WHERE InvoiceAcct=:invoiceId", nativeQuery = true)
+    String getInvoicePartner(@Param("invoiceId") String userId);
 
 
 }

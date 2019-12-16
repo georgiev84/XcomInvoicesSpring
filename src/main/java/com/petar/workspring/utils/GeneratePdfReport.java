@@ -7,6 +7,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.petar.workspring.domain.data.InvoiceProduct;
+import com.petar.workspring.domain.entities.Partner;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 
 public class GeneratePdfReport {
 
-    public static ByteArrayInputStream invoiceReport(List<InvoiceProduct> products) {
+    public static ByteArrayInputStream invoiceReport(List<InvoiceProduct> products, Partner partner) {
 
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -42,6 +43,8 @@ public class GeneratePdfReport {
 
             xCell = new PdfPCell(new Phrase("Получател", headFont));
             xCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tableByer.addCell(xCell);
+            xCell = new PdfPCell(new Phrase(partner.toString(), headFont));
             tableByer.addCell(xCell);
             mainTable.addCell(tableByer);
 

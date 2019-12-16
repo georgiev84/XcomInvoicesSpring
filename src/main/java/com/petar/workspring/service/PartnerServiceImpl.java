@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import java.lang.reflect.Type;
+
 
 @Service
 public class PartnerServiceImpl implements PartnerService {
@@ -39,5 +41,9 @@ public class PartnerServiceImpl implements PartnerService {
         return this.modelMapper.map(partner, PartnerServiceModel.class);
     }
 
-
+    @Override
+    public Partner partnerInfo(int userId) {
+        Partner partner = partnersRepository.findById(userId);
+        return partner;
+    }
 }
