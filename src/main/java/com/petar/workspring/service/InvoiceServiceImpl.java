@@ -1,7 +1,9 @@
 package com.petar.workspring.service;
 
 import com.petar.workspring.domain.data.Invoice;
+import com.petar.workspring.domain.data.InvoiceBasicInfo;
 import com.petar.workspring.domain.data.InvoiceProduct;
+import com.petar.workspring.domain.data.Owner;
 import com.petar.workspring.domain.entities.Partner;
 import com.petar.workspring.repository.PartnersRepository;
 import org.modelmapper.ModelMapper;
@@ -79,6 +81,8 @@ public class InvoiceServiceImpl implements InvoiceService {
                             public BigDecimal getPrice() {
                                 return avgPrice;
                             }
+
+
                         });
                     } else {
 
@@ -108,5 +112,16 @@ public class InvoiceServiceImpl implements InvoiceService {
     public String checkInvoiceOwner(String invoiceId) {
 
         return  invoiceRepository.getInvoicePartner(invoiceId);
+    }
+
+    @Override
+    public Owner getOwnerInfo() {
+        return invoiceRepository.getOwnerInfo();
+    }
+
+    @Override
+    public InvoiceBasicInfo getInvoiceBasicInfoDetails(String invoiceId) {
+        InvoiceBasicInfo invoice = invoiceRepository.getInvoiceBasicInfo(invoiceId);
+        return invoice;
     }
 }

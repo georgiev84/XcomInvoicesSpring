@@ -7,18 +7,21 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.petar.workspring.domain.data.InvoiceProduct;
+import com.petar.workspring.domain.data.Owner;
 import com.petar.workspring.domain.entities.Partner;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GeneratePdfReport {
 
-    public static ByteArrayInputStream invoiceReport(List<InvoiceProduct> products, Partner partner) {
+    public static ByteArrayInputStream invoiceReport(List<InvoiceProduct> products, Partner partner, Owner owner) {
 
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -55,6 +58,8 @@ public class GeneratePdfReport {
             xCell = new PdfPCell(new Phrase("Доставчик", headFont));
             xCell.setHorizontalAlignment(Element.ALIGN_CENTER);
             tableSeller.addCell(xCell);
+            xCell = new PdfPCell(new Phrase(owner.getCompany() + " " + owner.getAddress(), headFont));
+            tableSeller.addCell(xCell);
             mainTable.addCell(tableSeller);
 
             // TABLE PRODUCTS
@@ -87,6 +92,9 @@ public class GeneratePdfReport {
             hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
             table.addCell(hcell);
 
+            DecimalFormat df = new DecimalFormat("0.0000");
+            df.setRoundingMode(RoundingMode.CEILING);
+
             int counterRow =0;
             for (InvoiceProduct product : products) {
 
@@ -116,12 +124,20 @@ public class GeneratePdfReport {
                 cell.setPaddingRight(5);
                 table.addCell(cell);
 
-                cell = new PdfPCell(new Phrase(String.valueOf(product.getPrice()),commonFont));
+                cell = new PdfPCell(new Phrase(String.valueOf(df.format(product.getPrice())),commonFont));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_RIGHT);
                 cell.setPaddingRight(5);
                 table.addCell(cell);
             }
+
+//            PdfPCell cellTest;
+//
+//            cellTest = new PdfPCell(new Phrase(String.valueOf(),commonFont));
+//            cellTest.setVerticalAlignment(Element.ALIGN_MIDDLE);
+//            cellTest.setHorizontalAlignment(Element.ALIGN_CENTER);
+//            cellTest.setPaddingRight(5);
+//            table.addCell(cellTest);
 
             Paragraph paragraph = new Paragraph(" ");
 

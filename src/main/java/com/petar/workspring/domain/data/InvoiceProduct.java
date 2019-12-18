@@ -10,5 +10,4 @@ public interface InvoiceProduct {
     BigDecimal getPrice();
 
 
-
 }

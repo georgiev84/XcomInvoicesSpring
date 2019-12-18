@@ -1,6 +1,7 @@
 package com.petar.workspring.web.controllers;
 
 import com.petar.workspring.domain.data.InvoiceProduct;
+import com.petar.workspring.domain.data.Owner;
 import com.petar.workspring.domain.entities.Partner;
 import com.petar.workspring.service.InvoiceService;
 import com.petar.workspring.service.PartnerService;
@@ -29,11 +30,11 @@ public class PdfController {
     @RequestMapping(value = "/pdfreport/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> citiesReport(@PathVariable(name = "id") String id, HttpSession session) throws IOException {
         Partner partner = invoiceService.getPartnerInfo((int)session.getAttribute("userId"));
-
+        Owner owner = invoiceService.getOwnerInfo();
 
         List<InvoiceProduct> products = (List<InvoiceProduct>) invoiceService.getInvoiceDetails(id);
 
-        ByteArrayInputStream bis = GeneratePdfReport.invoiceReport(products, partner);
+        ByteArrayInputStream bis = GeneratePdfReport.invoiceReport(products, partner, owner);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "inline; filename=invoice.pdf");

@@ -2,7 +2,9 @@ package com.petar.workspring.service;
 
 
 import com.petar.workspring.domain.data.Invoice;
+import com.petar.workspring.domain.data.InvoiceBasicInfo;
 import com.petar.workspring.domain.data.InvoiceProduct;
+import com.petar.workspring.domain.data.Owner;
 import com.petar.workspring.domain.entities.Partner;
 import org.springframework.stereotype.Service;
 
@@ -19,4 +21,7 @@ public interface InvoiceService {
 
         String checkInvoiceOwner(String invoiceId);
 
+        Owner getOwnerInfo();
+
+        InvoiceBasicInfo getInvoiceBasicInfoDetails(String invoiceId);
 }

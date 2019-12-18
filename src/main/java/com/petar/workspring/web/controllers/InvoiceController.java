@@ -1,6 +1,7 @@
 package com.petar.workspring.web.controllers;
 
 import com.petar.workspring.domain.data.Invoice;
+import com.petar.workspring.domain.data.InvoiceBasicInfo;
 import com.petar.workspring.domain.data.InvoiceProduct;
 import com.petar.workspring.domain.models.binding.PartnerLoginBindingModel;
 import com.petar.workspring.domain.models.service.PartnerServiceModel;
@@ -59,15 +60,21 @@ public class InvoiceController {
     public ModelAndView details(@PathVariable(name = "id") String id, ModelAndView modelAndView, HttpSession session){
         String owner = invoiceService.checkInvoiceOwner(id);
         String sessionOwner = session.getAttribute("userId").toString();
+//        String ownerInfo = invoiceService.getOwnerInfo().getAddress();
+
 
         if(session.getAttribute("username") == null || !owner.equals(sessionOwner)){
             modelAndView.setViewName("redirect:/login");
         } else {
 
             ArrayList<InvoiceProduct> productList = invoiceService.getInvoiceDetails(id);
-
+//            InvoiceBasicInfo test = invoiceService.getInvoiceBasicInfoDetails(id);
+//            String t1 = test.getInvoiceAcct();
+//            String t2 = test.getInvoiceSum();
+//            String t3 = test.getRecipient();
 
             modelAndView.addObject("invoiceDetails", productList);
+//            modelAndView.addObject("owner", ownerInfo);
 
             modelAndView.setViewName("invoice_details");
         }
