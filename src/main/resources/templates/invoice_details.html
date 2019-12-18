@@ -12,9 +12,11 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<hr class="bg-exodia hr-2"/>
-<h1 class="text-center text-exodia">Продукти</h1>
-<hr class="bg-exodia hr-2"/>
+<hr class="bg-secondary hr-1"/>
+<h4 class="text-center text-black-100" th:text="'Фактура ' + ${invoiceBasicInfo.getInvoiceAcct()} + ' от ' + ${#dates.format(invoiceBasicInfo.getinvoiceDate(),'dd.MM.yyy')}">Продукти</h4>
+<div class="row justify-content-center" th:text="'Обща стойност ' + ${#numbers.formatDecimal(invoiceBasicInfo.getInvoiceSum(), 1, 'DEFAULT', 2, 'POINT')}"></div>
+<div class="row justify-content-center"><a th:target="_blank" th:href="@{/pdfreport/} + ${invoiceBasicInfo.getInvoiceAcct()}" >Свали в PDF <img th:src="@{../images/pdf.png}" th:width="25px" th:height="25px" th:title="Свали"/></a></div>
+<hr class="bg-secondary hr-1"/>
 
 <div class="row justify-content-center">
     <div class="col-auto">

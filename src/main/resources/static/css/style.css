@@ -22,3 +22,12 @@ textarea {
     min-height: 40px;
 
 }
+
+.bg-pesho {
+    background-color: #229ac8;
+    background-image: linear-gradient(to bottom, #800000, #cc0000);
+    background-repeat: repeat-x;
+    border-color: #1f90bb #1f90bb #145e7a;
+    min-height: 40px;
+
+}

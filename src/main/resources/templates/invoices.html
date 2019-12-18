@@ -12,9 +12,9 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<hr class="bg-exodia hr-2"/>
-<h1 class="text-center text-exodia">Списък с издадени фактури</h1>
-<hr class="bg-exodia hr-2"/>
+<hr class="bg-secondary hr-1"/>
+<h4 class="text-center text-black-100">Списък с издадени фактури</h4>
+<hr class="bg-secondary hr-1"/>
 
 
 <div class="row justify-content-center">
@@ -28,11 +28,11 @@
                 <th></th>
             </tr>
             <tr th:each="message : ${messages}">
-                <td><a th:href="@{/invoices/} + ${message.getInvoiceAcct()}" th:text="Отвори">Download</a></td>
+                <td><a th:href="@{/invoices/} + ${message.getInvoiceAcct()}"  th:text="Отвори">Download</a></td>
                 <td th:text="${message.getInvoiceAcct()}">Invoice ...</td>
                 <td th:text="${#dates.format(message.getInvoiceDate(), 'dd-MM-yyy')}">Date ...</td>
                 <td th:text="${#numbers.formatDecimal(message.getInvoiceSum(), 0, 'COMMA', 2, 'POINT')}">Sum ...</td>
-                <td><a th:href="@{/pdfreport/} + ${message.getInvoiceAcct()}" ><img th:src="@{images/pdf.png}" th:width="25px" th:height="25px" th:title="Свали"/></a></td>
+                <td><a th:target="_blank" th:href="@{/pdfreport/} + ${message.getInvoiceAcct()}" ><img th:src="@{images/pdf.png}" th:width="25px" th:height="25px" th:title="Свали"/></a></td>
             </tr>
         </table>
     </div>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -68,14 +69,12 @@ public class InvoiceController {
         } else {
 
             ArrayList<InvoiceProduct> productList = invoiceService.getInvoiceDetails(id);
-//            InvoiceBasicInfo test = invoiceService.getInvoiceBasicInfoDetails(id);
-//            String t1 = test.getInvoiceAcct();
-//            String t2 = test.getInvoiceSum();
-//            String t3 = test.getRecipient();
+            InvoiceBasicInfo invoiceBasicInfo = invoiceService.getInvoiceBasicInfoDetails(id);
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyy");
 
             modelAndView.addObject("invoiceDetails", productList);
 //            modelAndView.addObject("owner", ownerInfo);
-
+            modelAndView.addObject("invoiceBasicInfo", invoiceBasicInfo);
             modelAndView.setViewName("invoice_details");
         }
 
