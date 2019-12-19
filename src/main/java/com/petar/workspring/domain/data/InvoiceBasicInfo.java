@@ -15,6 +15,6 @@ public interface InvoiceBasicInfo {
     String getDescription();
     String getPlace();
     String getRecipient();
-
+    int getPaymentType();
 
 }

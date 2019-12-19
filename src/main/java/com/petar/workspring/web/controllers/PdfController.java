@@ -34,6 +34,7 @@ public class PdfController {
         Owner owner = invoiceService.getOwnerInfo();
         InvoiceBasicInfo invoiceBasicInfo = invoiceService.getInvoiceBasicInfoDetails(id);
 
+
         List<InvoiceProduct> products = (List<InvoiceProduct>) invoiceService.getInvoiceDetails(id);
 
         ByteArrayInputStream bis = GeneratePdfReport.invoiceReport(products, partner, owner, invoiceBasicInfo);

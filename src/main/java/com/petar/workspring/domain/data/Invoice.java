@@ -12,5 +12,4 @@ public interface Invoice {
     Date getInvoiceDate();
     BigDecimal getInvoiceSum();
 
-
 }
