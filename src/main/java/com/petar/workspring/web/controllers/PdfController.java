@@ -34,6 +34,12 @@ public class PdfController {
         Owner owner = invoiceService.getOwnerInfo();
         InvoiceBasicInfo invoiceBasicInfo = invoiceService.getInvoiceBasicInfoDetails(id);
 
+        // security check if invoice owner is the same logged in
+        String invoiceOwner = invoiceService.checkInvoiceOwner(id);
+        String sessionOwner = session.getAttribute("userId").toString();
+        if(session.getAttribute("username") == null || invoiceOwner == null || !invoiceOwner.equals(sessionOwner)){
+            return null;
+        }
 
         List<InvoiceProduct> products = (List<InvoiceProduct>) invoiceService.getInvoiceDetails(id);
 

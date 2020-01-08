@@ -63,8 +63,8 @@ public class InvoiceController {
         String sessionOwner = session.getAttribute("userId").toString();
 //        String ownerInfo = invoiceService.getOwnerInfo().getAddress();
 
-
-        if(session.getAttribute("username") == null || !owner.equals(sessionOwner)){
+        // security check if invoice owner is the same logged in
+        if(session.getAttribute("username") == null || owner == null || !owner.equals(sessionOwner)){
             modelAndView.setViewName("redirect:/login");
         } else {
 
