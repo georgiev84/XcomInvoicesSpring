@@ -29,7 +29,7 @@ public class InvoiceController {
     }
 
     @GetMapping("/invoices")
-    public ModelAndView invoices(ModelAndView modelAndView, HttpSession session){
+    public ModelAndView invoices(ModelAndView modelAndView, HttpSession session)  {
         if(session.getAttribute("username") != null){
 
             modelAndView.setViewName("invoices");

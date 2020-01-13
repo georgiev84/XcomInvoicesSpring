@@ -20,8 +20,9 @@ public class InvoiceApiController {
     }
 
     @GetMapping("/api/invoices")
-    public ArrayList<Invoice> invoiceList(HttpSession session){
+    public ArrayList<Invoice> invoiceList(HttpSession session) throws InterruptedException {
 
+        Thread.sleep(3000);
         if(session.getAttribute("username") != null){
 
             ArrayList<Invoice> invoices;

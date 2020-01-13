@@ -1,4 +1,12 @@
+const loader = {
+    show: () => {
+        $('#page-loader').show();
+    },
+    hide: () => {
+        $('#page-loader').hide();
+    },
 
+}
 const URLS = {
     invoices: '/api/invoices',
 }
@@ -20,7 +28,9 @@ const toString = ({invoiceAcct, invoiceSum, documentAcct, invoiceDate}) => `
 //     console.log("data", data);
 // });
 
+loader.show();
 fetch(URLS.invoices)
+
     .then(response => response.json())
 .then(invoices => {
     let result = '';
@@ -28,6 +38,8 @@ fetch(URLS.invoices)
         const invoiceString = toString(invoice);
         result += invoiceString;
     });
-    console.log(result);
-    document.getElementById('invoice-table').innerHTML = result;
+
+    // document.getElementById('invoice-table').innerHTML = result;
+    $('#invoice-table').html(result);
+    loader.hide();
 });
