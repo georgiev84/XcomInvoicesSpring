@@ -50,10 +50,6 @@ public class InvoiceController {
             modelAndView.setViewName("redirect:/");
         }
 
-
-
-
-
         return modelAndView;
     }
 
