@@ -9,7 +9,7 @@ const toString = ({invoiceAcct, invoiceSum, documentAcct, invoiceDate}) => `
                 <td><a href="/invoices/${invoiceAcct}">${invoiceAcct}</a></td>
                 <td>${invoiceDate}</td>
                 <td>${invoiceSum}</td>
-                <td></td>
+                <td><a target="_blank" href="/pdfreport/${invoiceAcct}"><img src="/images/pdf.png" th:width="25px" th:height="25px" th:title="Свали"/></a></td>
             </tr>
 `
 
