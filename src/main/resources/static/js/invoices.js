@@ -6,7 +6,7 @@ const URLS = {
 const toString = ({invoiceAcct, invoiceSum, documentAcct, invoiceDate}) => `
             <tr>
                 <td></td>
-                <td>${invoiceAcct}</td>
+                <td><a href="/invoices/${invoiceAcct}">${invoiceAcct}</a></td>
                 <td>${invoiceDate}</td>
                 <td>${invoiceSum}</td>
                 <td></td>
