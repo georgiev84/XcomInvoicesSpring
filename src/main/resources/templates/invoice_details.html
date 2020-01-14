@@ -9,11 +9,13 @@
     <link rel="stylesheet" th:href="@{/css/reset-css.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/invoices.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <hr class="bg-secondary hr-1"/>
-<h4 class="text-center text-black-100" th:text="'Фактура ' + ${invoiceBasicInfo.getInvoiceAcct()} + ' от ' + ${#dates.format(invoiceBasicInfo.getinvoiceDate(),'dd.MM.yyy')}">Продукти</h4>
+<h4 id="invoice-number-id" class="text-center text-black-100" th:text="'Фактура ' + ${invoiceBasicInfo.getInvoiceAcct()} + ' от ' + ${#dates.format(invoiceBasicInfo.getinvoiceDate(),'dd.MM.yyy')}">Продукти</h4>
 <div class="row justify-content-center" th:text="'Обща стойност ' + ${#numbers.formatDecimal(invoiceBasicInfo.getInvoiceSum(), 1, 'DEFAULT', 2, 'POINT') + ' лв.'}"></div>
 <div class="row justify-content-center mt-1"><a th:target="_blank" th:href="@{/pdfreport/} + ${invoiceBasicInfo.getInvoiceAcct()}" >Свали в PDF <img th:src="@{../images/pdf.png}" th:width="25px" th:height="25px" th:title="Свали"/></a></div>
 <hr class="bg-secondary hr-1"/>
@@ -22,23 +24,27 @@
     <div class="col-auto">
         <table class="text-center table table-responsive">
             <tr>
-                <th>Бр</th>
                 <th>Код</th>
                 <th>Продукт</th>
                 <th>Брой</th>
                 <th>Цена в лв. без ДДС</th>
+                <th>Общо без ДДС</th>
             </tr>
-            <tr th:each="details,iterStat : ${invoiceDetails}">
-                <td th:text="${iterStat.index+1}">1</td>
-                <td th:text="${details.getCode()}">1</td>
-                <td th:text="${details.getName()}">Title .../td>
-                <td th:text="${details.getQtty()}">Text ...</td>
-                <td th:text="${#numbers.formatDecimal(details.getPrice(), 1, 'COMMA', 4, 'POINT')}">Title .../td>
+            <tbody id="invoice-details-table"></tbody>
+<!--            <tr th:each="details,iterStat : ${invoiceDetails}">-->
+<!--                <td th:text="${iterStat.index+1}">1</td>-->
+<!--                <td th:text="${details.getCode()}">1</td>-->
+<!--                <td th:text="${details.getName()}">Title .../td>-->
+<!--                <td th:text="${details.getQtty()}">Text ...</td>-->
+<!--                <td th:text="${#numbers.formatDecimal(details.getPrice(), 1, 'COMMA', 4, 'POINT')}">Title .../td>-->
 
-            </tr>
+<!--            </tr>-->
         </table>
     </div>
 
 </div>
+<th:block th:include="~{fragments/loader}" />
+<script src="/js/invoice_details.js" ></script>
+
 </body>
 </html>

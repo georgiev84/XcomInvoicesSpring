@@ -42,9 +42,9 @@ public class InvoiceController {
             if (userid == null){
                 //kur tuka trqq varnesh neshto 4e ne eok da ne praish zaqvka naprazno
             } else {
-                invoices = invoiceService.getInvoicesForUser(userid);
+//                invoices = invoiceService.getInvoicesForUser(userid);
                 modelAndView.addObject("company", session.getAttribute("company"));
-                modelAndView.addObject("messages", invoices);
+//                modelAndView.addObject("messages", invoices);
             }
         } else {
             modelAndView.setViewName("redirect:/");
@@ -64,12 +64,12 @@ public class InvoiceController {
             modelAndView.setViewName("redirect:/login");
         } else {
 
-            ArrayList<InvoiceProduct> productList = invoiceService.getInvoiceDetails(id);
+//            ArrayList<InvoiceProduct> productList = invoiceService.getInvoiceDetails(id);
             InvoiceBasicInfo invoiceBasicInfo = invoiceService.getInvoiceBasicInfoDetails(id);
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyy");
 
 
-            modelAndView.addObject("invoiceDetails", productList);
+//            modelAndView.addObject("invoiceDetails", productList);
 //            modelAndView.addObject("owner", ownerInfo);
             modelAndView.addObject("invoiceBasicInfo", invoiceBasicInfo);
             modelAndView.setViewName("invoice_details");

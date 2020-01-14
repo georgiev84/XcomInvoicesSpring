@@ -7,8 +7,10 @@ const loader = {
     },
 
 }
+
 const URLS = {
     invoices: '/api/invoices',
+    invoiceDetails: '/api/invoices/{id}'
 }
 
 const toString = ({invoiceAcct, invoiceSum, documentAcct, invoiceDate}) => `
@@ -16,7 +18,7 @@ const toString = ({invoiceAcct, invoiceSum, documentAcct, invoiceDate}) => `
                 <td><a href="/invoices/${invoiceAcct}">Отвори</a></td>
                 <td>${invoiceAcct}</td>
                 <td>${formatDate(invoiceDate)}</td>
-                <td>${invoiceSum.toFixed(2)}</td>
+                <td>${invoiceSum.toFixed(2)} лв.</td>
                 <td><a target="_blank" href="/pdfreport/${invoiceAcct}"><img src="/images/pdf.png" th:width="25px" th:height="25px" th:title="Свали"/></a></td>
             </tr>
 `
@@ -43,6 +45,7 @@ fetch(URLS.invoices)
     $('#invoice-table').html(result);
     loader.hide();
 });
+
 
 
 function formatDate(date) {
