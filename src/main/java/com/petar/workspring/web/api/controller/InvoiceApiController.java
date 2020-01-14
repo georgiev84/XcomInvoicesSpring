@@ -2,6 +2,7 @@ package com.petar.workspring.web.api.controller;
 
 import com.petar.workspring.domain.data.Invoice;
 import com.petar.workspring.domain.data.InvoiceBasicInfo;
+import com.petar.workspring.domain.data.InvoiceForRest;
 import com.petar.workspring.domain.data.InvoiceProduct;
 import com.petar.workspring.service.InvoiceService;
 import com.petar.workspring.web.api.model.InvoiceResponseModel;
@@ -66,6 +67,8 @@ public class InvoiceApiController {
             modelAndView.setViewName("invoiceBasicInfo");
 
             ArrayList<InvoiceProduct> productList = invoiceService.getInvoiceDetails(id);
+
+            InvoiceForRest testing = new InvoiceForRest(productList, invoiceBasicInfo);
 
             return productList;
         }
