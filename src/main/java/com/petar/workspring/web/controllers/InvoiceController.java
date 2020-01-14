@@ -68,6 +68,7 @@ public class InvoiceController {
             InvoiceBasicInfo invoiceBasicInfo = invoiceService.getInvoiceBasicInfoDetails(id);
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyy");
 
+
             modelAndView.addObject("invoiceDetails", productList);
 //            modelAndView.addObject("owner", ownerInfo);
             modelAndView.addObject("invoiceBasicInfo", invoiceBasicInfo);

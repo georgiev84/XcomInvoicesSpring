@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,7 +14,7 @@ import lombok.Setter;
 public class InvoiceResponseModel {
     private String invoiceAcct;
     private String invoiceSum;
-    private String invoiceDate;
+    private Date invoiceDate;
     private String documentAcct;
 
 

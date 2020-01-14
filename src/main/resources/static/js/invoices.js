@@ -13,10 +13,10 @@ const URLS = {
 
 const toString = ({invoiceAcct, invoiceSum, documentAcct, invoiceDate}) => `
             <tr>
-                <td></td>
-                <td><a href="/invoices/${invoiceAcct}">${invoiceAcct}</a></td>
-                <td>${invoiceDate}</td>
-                <td>${invoiceSum}</td>
+                <td><a href="/invoices/${invoiceAcct}">Отвори</a></td>
+                <td>${invoiceAcct}</td>
+                <td>${formatDate(invoiceDate)}</td>
+                <td>${invoiceSum.toFixed(2)}</td>
                 <td><a target="_blank" href="/pdfreport/${invoiceAcct}"><img src="/images/pdf.png" th:width="25px" th:height="25px" th:title="Свали"/></a></td>
             </tr>
 `
@@ -43,3 +43,18 @@ fetch(URLS.invoices)
     $('#invoice-table').html(result);
     loader.hide();
 });
+
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [day, month, year].join('-');
+}
