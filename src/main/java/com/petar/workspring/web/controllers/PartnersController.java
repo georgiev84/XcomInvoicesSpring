@@ -35,8 +35,6 @@ public class PartnersController {
             modelAndView.setViewName("login");
         }
 
-        //modelAndView.setViewName("login");
-
         return modelAndView;
     }
     @PostMapping("/login")

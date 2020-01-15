@@ -68,7 +68,7 @@ public class InvoiceApiController {
 
             ArrayList<InvoiceProduct> productList = invoiceService.getInvoiceDetails(id);
 
-            InvoiceForRest testing = new InvoiceForRest(productList, invoiceBasicInfo);
+//            InvoiceForRest testing = new InvoiceForRest(productList, invoiceBasicInfo);
 
             return productList;
         }
