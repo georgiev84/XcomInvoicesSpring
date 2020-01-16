@@ -31,3 +31,7 @@ textarea {
     min-height: 40px;
 
 }
+
+#inv-inf {
+    white-space: nowrap;
+}

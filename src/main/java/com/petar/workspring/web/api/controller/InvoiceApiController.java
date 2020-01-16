@@ -51,7 +51,7 @@ public class InvoiceApiController {
     }
 
     @GetMapping("/api/invoices/{id}")
-    public ArrayList<InvoiceProduct> details(@PathVariable(name = "id") String id, HttpSession session, ModelAndView modelAndView){
+    public InvoiceForRest details(@PathVariable(name = "id") String id, HttpSession session, ModelAndView modelAndView){
         String owner = invoiceService.checkInvoiceOwner(id);
         String sessionOwner = session.getAttribute("userId").toString();
 
@@ -68,9 +68,9 @@ public class InvoiceApiController {
 
             ArrayList<InvoiceProduct> productList = invoiceService.getInvoiceDetails(id);
 
-//            InvoiceForRest testing = new InvoiceForRest(productList, invoiceBasicInfo);
+            InvoiceForRest testing = new InvoiceForRest(productList, invoiceBasicInfo);
 
-            return productList;
+            return testing;
         }
 
     }
