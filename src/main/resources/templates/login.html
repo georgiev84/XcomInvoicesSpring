@@ -14,11 +14,32 @@
 <header>
     <div th:replace="fragments/header :: header"></div>
 </header>
+<!--    <main class="mt-3">-->
+<!--        <hr class="bg-secondary hr-1"/>-->
+<!--        <h1 class="text-center text-black-100">Вход</h1>-->
+<!--        <hr class="bg-secondary w-25 hr-1"/>-->
+<!--        <form class="mx-auto w-25" th:method="post" th:action="@{/login}">-->
+<!--            <div class="form-group">-->
+<!--                <label for="username" class="text-black-100">Потребител</label>-->
+<!--                <input type="text" class="form-control" id="username" placeholder="Потребител..." name="username">-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="password" class="text-black-100">Парола</label>-->
+<!--                <input type="password" class="form-control" id="password" placeholder="Парола..." name="password">-->
+<!--            </div>-->
+<!--            <hr class="bg-secondary hr-1"/>-->
+<!--            <div class="button-holder d-flex justify-content-center">-->
+<!--                <button type="submit" class="btn bg-pesho text-white">Продължи</button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--        <hr class="bg-secondary hr-1 mt-5"/>-->
+<!--    </main>-->
+
     <main class="mt-3">
         <hr class="bg-secondary hr-1"/>
         <h1 class="text-center text-black-100">Вход</h1>
         <hr class="bg-secondary w-25 hr-1"/>
-        <form class="mx-auto w-25" th:method="post" th:action="@{/login}">
+        <form class="mx-auto w-25" method="post" action="/api/login">
             <div class="form-group">
                 <label for="username" class="text-black-100">Потребител</label>
                 <input type="text" class="form-control" id="username" placeholder="Потребител..." name="username">
@@ -34,5 +55,37 @@
         </form>
         <hr class="bg-secondary hr-1 mt-5"/>
     </main>
+
+
+
+
+<script type='text/javascript'>
+    /* attach a submit handler to the form */
+    $("#formoid").submit(function(event) {
+
+        /* stop form from submitting normally */
+        // event.preventDefault();
+        //
+        // /* get the action attribute from the <form action=""> element */
+        // var $form = $( this ),
+        //     url = $form.attr( 'action' );
+        //
+        // /* Send the data using post with element id user and pass */
+        // var posting = $.post( url, { name: $('#user').val(), name2: $('#pass').val() } );
+        //
+        // /* Alerts the results */
+        // posting.done(function( data ) {
+        //     alert('success');
+        // });
+
+        $.ajax({
+            type: "POST",
+            url: "/api/login",
+            data: { usern: "John", pass: "Boston" } // parameters
+        })
+
+    });
+</script>
+
 </body>
 </html>

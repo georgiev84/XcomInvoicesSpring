@@ -3,8 +3,10 @@ package com.petar.workspring.web.api.controller;
 import com.petar.workspring.domain.models.binding.PartnerLoginBindingModel;
 import com.petar.workspring.domain.models.service.PartnerServiceModel;
 import com.petar.workspring.service.PartnerService;
+import jdk.internal.jline.internal.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,10 +47,33 @@ public class PartnersApiController {
     }
 
 
-    @RequestMapping(value = "/api/login", headers="Content-Type=application/json", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public String saveData(@RequestParam  String username,  @RequestParam String password, HttpServletResponse response, HttpSession session) throws IOException {
+//    @RequestMapping(value = "/api/login", headers="Content-Type=application/json", method = RequestMethod.POST)
+//    @ResponseStatus(HttpStatus.OK)
+//    @ResponseBody
+//    public String saveData(@RequestParam  String username,  @RequestParam String password, HttpServletResponse response, HttpSession session) throws IOException {
+//
+//        PartnerServiceModel inputModel = new PartnerServiceModel();
+//        inputModel.setUsername(username);
+//        inputModel.setPassword(password);
+//
+//
+//        PartnerServiceModel partnerServiceModel = this.partnerService.loginUser(inputModel);
+//        if(partnerServiceModel != null){
+//
+//            session.setAttribute("userId", partnerServiceModel.getId());
+//            session.setAttribute("username", partnerServiceModel.getUsername());
+//            session.setAttribute("company", partnerServiceModel.getCompany());
+//
+//            response.sendRedirect("/api/invoices");
+//        }
+//
+//        int b=1;
+//        return "ssss";
+//    }
+
+    @RequestMapping(value = "/api/login", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    String Submit(@RequestParam("username") String username,@RequestParam("password") String password, HttpServletResponse response, HttpSession session) throws IOException {
 
         PartnerServiceModel inputModel = new PartnerServiceModel();
         inputModel.setUsername(username);
@@ -62,11 +87,19 @@ public class PartnersApiController {
             session.setAttribute("username", partnerServiceModel.getUsername());
             session.setAttribute("company", partnerServiceModel.getCompany());
 
-            response.sendRedirect("/api/invoices");
+            response.sendRedirect("/invoices");
+
+            // if client is mobile must redirect to response.sendRedirect("/api/invoices");
         }
 
         int b=1;
         return "ssss";
+
     }
-}
+
+
+
+
+
+    }
 
