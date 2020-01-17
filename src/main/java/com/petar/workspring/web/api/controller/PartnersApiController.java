@@ -89,7 +89,9 @@ public class PartnersApiController {
 
 
             // if client is mobile must redirect to response.sendRedirect("/api/invoices");
-           if(userAgent.equals("custom-user-agent")){
+            String checkAgent = userAgent;
+            int a=1;
+           if(userAgent.equals("custom-agent")){
                // redirect to /api/invoices
                // must apply custom-user-agent in android app
                response.sendRedirect("/api/invoices");
