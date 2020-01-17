@@ -3,11 +3,10 @@ package com.petar.workspring.web.api.controller;
 import com.petar.workspring.domain.models.binding.PartnerLoginBindingModel;
 import com.petar.workspring.domain.models.service.PartnerServiceModel;
 import com.petar.workspring.service.PartnerService;
-import jdk.internal.jline.internal.Log;
+
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.mobile.device.Device;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,8 +71,9 @@ public class PartnersApiController {
 //    }
 
     @RequestMapping(value = "/api/login", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE)
+
     public @ResponseBody
-    String Submit(@RequestParam("username") String username,@RequestParam("password") String password, HttpServletResponse response, HttpSession session) throws IOException {
+    String Submit(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletResponse response, HttpSession session, @RequestHeader(value="User-Agent") String userAgent) throws IOException {
 
         PartnerServiceModel inputModel = new PartnerServiceModel();
         inputModel.setUsername(username);
@@ -87,9 +87,15 @@ public class PartnersApiController {
             session.setAttribute("username", partnerServiceModel.getUsername());
             session.setAttribute("company", partnerServiceModel.getCompany());
 
-            response.sendRedirect("/invoices");
 
             // if client is mobile must redirect to response.sendRedirect("/api/invoices");
+           if(userAgent.equals("custom-user-agent")){
+               // redirect to /api/invoices
+               // must apply custom-user-agent in android app
+               response.sendRedirect("/api/invoices");
+           } else {
+               response.sendRedirect("/invoices");
+           }
         }
 
         int b=1;
