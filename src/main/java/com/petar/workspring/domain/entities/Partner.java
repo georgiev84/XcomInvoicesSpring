@@ -19,6 +19,11 @@ public class Partner extends BaseEntity{
     public Partner() {
     }
 
+    public Partner(String username, String company) {
+        this.username = username;
+        this.company = company;
+    }
+
     @Column(name = "email", columnDefinition = "nvarchar(255)")
     public String getUsername() {
         return username;

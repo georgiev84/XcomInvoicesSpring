@@ -16,7 +16,8 @@
     left: 44%;
     width: 100%;
     /*background-image: url("https://i.imgur.com/CS0KVsi.gif");*/
-    background-image: url("https://steamuserimages-a.akamaihd.net/ugc/915793643567262416/61D85F670D4D9221745B7A844EBD595BFA150EB6/");
+    /*background-image: url("https://steamuserimages-a.akamaihd.net/ugc/915793643567262416/61D85F670D4D9221745B7A844EBD595BFA150EB6/");*/
+   background-image: url("/images/cube-loading.gif");
     height: 280px;
     background-repeat: no-repeat;
     background-size: 250px;
